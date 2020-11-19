@@ -10,7 +10,7 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.permissions import IsAuthenticated
 from django.http import HttpResponseRedirect
 from rest_framework.generics import (CreateAPIView)
-
+from django.contrib.auth import authenticate, login
 # Create your views here.
 
 
@@ -56,5 +56,29 @@ class HelloView(APIView):
         content = {'message': 'Hello, World!'}
         return Response(content)
 
+@csrf_exempt
+def login_detail(request, pk):
+    """
+    Retrieve, update or delete a code login.
+    """
+    try:
+        login = Register.objects.get(pk=pk)
+    except Register.DoesNotExist:
+        return HttpResponse(status=404)
 
+    if request.method == 'GET':
+        serializer = Registerserializers(login)
+        return JsonResponse(serializer.data)
+
+    elif request.method == 'PUT':
+        data = JSONParser().parse(request)
+        serializer = Registerserializers(login, data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data)
+        return JsonResponse(serializer.errors, status=400)
+
+    elif request.method == 'DELETE':
+        login.delete()
+        return HttpResponse(status=204)
 
