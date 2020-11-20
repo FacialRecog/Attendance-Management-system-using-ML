@@ -12,5 +12,4 @@ class Register(models.Model):
     age=models.IntegerField()
     model_pic = models.ImageField(upload_to = '', default = 'none/no-img.jpg')
     
-
 	
