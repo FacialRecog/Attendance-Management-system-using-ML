@@ -10,6 +10,8 @@ class Register(models.Model):
     password=models.CharField(max_length=20)
     confirm_password=models.CharField(max_length=20)
     age=models.IntegerField()
-    model_pic = models.ImageField(upload_to = '', default = 'none/no-img.jpg')
-    
+   # model_pic = models.ImageField(upload_to = '', default = 'none/no-img.jpg')
+    image = models.ImageField(upload_to = '',default = 'none/no-img.jpg') 
 	
+class Attendance(models.Model):
+    image1 = models.ImageField(upload_to = '',default = 'none/no-img.jpg') 

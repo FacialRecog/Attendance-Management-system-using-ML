@@ -14,4 +14,6 @@ urlpatterns = [
     path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
     path('hello/', views.HelloView.as_view(), name='hello'),
     url(r'^upload/$', views.ImageCreateAPIView.as_view()),
+    url(r'^image/$', views.FileUploadView.as_view()),
+    url(r'^Attendance/$', views.attendanceAPIView.as_view()),
 ]
